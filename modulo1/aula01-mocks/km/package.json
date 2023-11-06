@@ -4,15 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "node ./src/csvToJSON.test.js"
+  },
+  "engines": {
+    "node": "18"
   },
   "author": "kelvinmodesto",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/core": "^7.23.2",
-    "@babel/preset-env": "^7.23.2",
-    "@jest/globals": "^29.7.0",
-    "babel-jest": "^29.7.0",
-    "jest": "^29.7.0"
-  }
+  "license": "ISC"
 }
