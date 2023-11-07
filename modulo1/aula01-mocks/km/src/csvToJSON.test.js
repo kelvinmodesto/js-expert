@@ -1,5 +1,5 @@
 const  assert = require('assert');
-const { constants } = require('./constants');
+const { error } = require('./constants');
 const { csvToJSON } = require("./csvToJSON");
 
 // IFEE
@@ -7,25 +7,28 @@ const { csvToJSON } = require("./csvToJSON");
 
     {
         const filePath = './mocks/emptyFile-invalid.csv';
-        const expected = new Error(constants.error.FILE_LENGTH_ERROR_MESSAGE);
+        const expected = new Error(error.FILE_LENGTH_ERROR_MESSAGE);
         const result =  csvToJSON(filePath)
 
-        assert.rejects(result,expected);
+        await assert.rejects(result,expected);
     }
 
     {
         const filePath = './mocks/invalid-header.csv';
-        const expected = new Error(constants.error.FILE_FIELDS_ERROR_MESSAGE);
+        const expected = new Error(error.FILE_FIELDS_ERROR_MESSAGE);
+        const result =  csvToJSON(filePath)
 
-        expect(() =>  csvToJSON(filePath)).toThrow(expected);
+        await assert.rejects(result,expected);
     }
 
     {
         const filePath = './mocks/fiveItems-invalid.csv';
-        const expected = new Error(constants.error.FILE_LENGTH_ERROR_MESSAGE);
+        const expected = new Error(error.FILE_LENGTH_ERROR_MESSAGE);
+        const result =  csvToJSON(filePath)
 
-        expect(() =>  csvToJSON(filePath)).toThrow(expected);
+        await assert.rejects(result,expected);
     }
+
     {
         const filePath = './mocks/threeItems-valid.csv';
         const expected = [
@@ -50,6 +53,6 @@ const { csvToJSON } = require("./csvToJSON");
         ];
         const result = await csvToJSON(filePath);
 
-        expect(result).toStrictEqual(expected);
+        assert.deepEqual(result,expected);
     }
-});
+})();

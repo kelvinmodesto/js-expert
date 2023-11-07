@@ -1,5 +1,5 @@
 const { readFile } = require('fs/promises');
-const { constants } = require('./constants.js');
+const { error } = require('./constants.js');
 
 const DEFAULT_OPTION = {
     maxLines: 3,
@@ -33,9 +33,10 @@ const parseCsvToJSON = (csvString) => {
 const isValid = (csvString, options = DEFAULT_OPTION) => {
     const [header, ...fileWithoutHeader] = csvString.split(/\r?\n/);
     const isHeaderValid = header === options.fields.join(',');
+
     if(!isHeaderValid) {
         return {
-            error: constants.error.FILE_FIELDS_ERROR_MESSAGE,
+            error: error.FILE_FIELDS_ERROR_MESSAGE,
             valid: false
         };
     }
@@ -45,7 +46,7 @@ const isValid = (csvString, options = DEFAULT_OPTION) => {
         fileWithoutHeader.length > options.maxLines
     ) {
         return {
-            error: constants.error.FILE_LENGTH_ERROR_MESSAGE,
+            error: error.FILE_LENGTH_ERROR_MESSAGE,
             valid: false
         }
     }
