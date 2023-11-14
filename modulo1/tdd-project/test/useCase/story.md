@@ -1,4 +1,5 @@
 # Story: Renting a car
+
 ## Use Case 01
 
 As a system user
