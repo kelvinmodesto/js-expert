@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx mocha -w --parallel **/**/*.test.js",
+    "test:cov": "npx nyc npx mocha --parallel **/**/*.test.js",
     "seed": "node ./seed"
   },
   "devDependencies": {
@@ -15,6 +16,6 @@
     "sinon": "^9.2.4"
   },
   "keywords": [],
-  "author": "",
+  "author": "kelvinmodesto",
   "license": "ISC"
 }
