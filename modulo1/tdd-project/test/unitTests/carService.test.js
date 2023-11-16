@@ -1,10 +1,10 @@
-const { after, afterEach, before, beforeEach, describe, it } = require('mocha');
+const { afterEach, before, beforeEach, describe, it } = require('mocha');
 
 const { createSandbox } = require('sinon');
 const { expect } = require('chai');
-const {BaseRepository} = require("../../src/repository/baseRepository");
-const {join} = require("path");
+const { join} = require("path");
 const CarService = require("./../../src/service/carService");
+const Transaction = require("../../src/entities/transaction");
 
 const carsDatabase = join(__dirname, "./../../database", "cars.json");
 
@@ -20,7 +20,6 @@ describe("CarService Suit test", () => {
   let sandbox = {};
 
   before(() => {
-    console.log(carsDatabase);
     carService = new CarService({ cars: carsDatabase })
   });
 
@@ -67,4 +66,58 @@ describe("CarService Suit test", () => {
     expect(result).to.be.deep.equal(car);
   });
 
+  it('given a carCategory, customer and numberOfDays it should it should return the final amount in BRL', async () => {
+    const customer = Object.create(mocks.validCustomer);
+    customer.age = 50;
+
+    const carCategory = Object.create(mocks.validCarCategory);
+    carCategory.price = 37.6;
+
+    const numberOfDays = 5;
+
+    // age: 50 - 1.3 tax - categoryPrice 37.6
+    // 37.6 * 1.3 = 48,88 * 5 days = 244.40
+    sandbox.stub(
+      carService,
+      'taxesBasedOnAge'
+    ).get(() => [{ from: 40, to: 50, then: 1.3 }]);
+    const expected = carService.currencyFormat.format(244.40);
+    const result = carService.calculateFinalPrice(customer, carCategory, numberOfDays);
+
+    expect(result).to.be.deep.equal(expected);
+  });
+
+  it('given a car category and customer it should return a transaction receipt', async () => {
+    const car = mocks.validCar;
+    const carCategory = {
+      ...mocks.validCarCategory,
+      price: 37.6,
+      carIds: [car.id]
+    };
+
+    const customer = Object.create(mocks.validCustomer);
+    customer.age = 20;
+
+    const numberOfDays = 5;
+    const dueDate = '10 de novembro de 2020';
+
+    const now = new Date(2020, 10, 5);
+    sandbox.useFakeTimers(now.getTime());
+    sandbox.stub(
+      carService.carsRepository,
+      carService.carsRepository.find.name
+    ).resolves(car);
+
+    const expectedAmount = carService.currencyFormat.format(206.80);
+    const result = await carService.rent(customer, carCategory, numberOfDays);
+
+    const expected = new Transaction({
+      customer,
+      car,
+      dueDate,
+      amount: expectedAmount,
+    });
+
+    expect(result).to.be.deep.equal(expected);
+  });
 });
