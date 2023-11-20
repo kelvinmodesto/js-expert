@@ -33,9 +33,13 @@ export default class TerminalController {
     this.terminal.close();
   }
 
-  /** @type {string} msg **/
   question(msg = '') {
     return new Promise(resolve => this.terminal.question(msg, resolve));
+  }
+
+  updateTable(item) {
+    this.data.push(item);
+    this.print(chalkTable(this.getTableOptions(), this.data))
   }
 
   getTableOptions() {
