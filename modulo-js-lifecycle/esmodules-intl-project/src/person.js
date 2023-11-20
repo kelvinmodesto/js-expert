@@ -7,13 +7,13 @@ export default class Person {
     this.to = to;
   }
 
+  mapDate(date) {
+    const [year, month, day] = date.split('-').map(Number);
+
+    return new Date(year, (month-1), day);
+  }
+
   format(language)  {
-    const mapDate = (date) => {
-      const [year, month, day] = date.split('-').map(Number);
-
-      return new Date(year, (month-1), day);
-    };
-
     return {
       id: Number(this.id),
       vehicles: new Intl
@@ -22,9 +22,16 @@ export default class Person {
       kmTraveled: new Intl
         .NumberFormat(language, { style: 'unit', unit: 'kilometer' })
         .format(this.kmTraveled),
-      from: new Intl.DateTimeFormat(language, { month: 'long', day: '2-digit', year: 'numeric' }).format(mapDate(this.from)),
-      to: new Intl.DateTimeFormat(language, { month: 'long', day: '2-digit', year: 'numeric' }).format(mapDate(this.to)),
+      from: new Intl.DateTimeFormat(language, {
+        month: 'long',
+        day: '2-digit',
+        year: 'numeric'
+      }).format(this.mapDate(this.from)),
+      to: new Intl.DateTimeFormat(language, {
+        month: 'long',
+        day: '2-digit',
+        year: 'numeric'
+      }).format(this.mapDate(this.to)),
     };
-
   }
 }

@@ -15,7 +15,7 @@ export default class TerminalController {
         this.terminal = readline.createInterface({
             input: process.stdin,
             output: process.stdout
-        })
+        });
 
         this.initializeTable(database, language)
     }
@@ -23,7 +23,7 @@ export default class TerminalController {
     initializeTable(database, language) {
         const data = database.map(item => new Person(item).formatted(language))
         const table = chalkTable(this.getTableOptions(), data)
-        
+
         this.print = console.draft(table)
         this.data = data
     }
