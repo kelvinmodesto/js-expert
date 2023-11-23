@@ -22,7 +22,7 @@ async function mainLoop() {
     const person = Person.generateInstanceFromString(answer);
     terminalController.updateTable(person.format(DEFAULT_LANG));
 
-    await save();
+    await save(person);
 
     return mainLoop();
   } catch (error) {

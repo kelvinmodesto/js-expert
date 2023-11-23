@@ -1,9 +1,9 @@
 export const mockDatabase = [
   {
     id: 1,
-    vehicles: ["Motocicleta", "Carro", "Caminhão"],
-    kmTraveled: 10000,
-    from: "2009-01-01",
-    to: "2020-11-26"
+    vehicles: "Motocicleta, Carro e Caminhão",
+    kmTraveled: "10.000 km",
+    from: "01 de janeiro de 2009",
+    to: "26 de novembro de 2020"
   }
 ];

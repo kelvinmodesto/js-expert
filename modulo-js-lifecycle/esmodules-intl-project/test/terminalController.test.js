@@ -15,6 +15,7 @@ describe('Terminal Controller Suit test', () => {
   });
   afterEach(() => {
     terminalController.closeTerminal();
+    terminalController = {};
   });
   it('should get static options for terminal', () => {
     const result  = terminalController.getTableOptions();
@@ -31,10 +32,17 @@ describe('Terminal Controller Suit test', () => {
 
     expect(result).to.be.deep.equal(expected);
   });
-  it('should make question', () =>  {
-
-  });
   it('should update table', () =>  {
+    const mockNewEntry = {
+      id: "2",
+      vehicles: "Havaianas e HB20",
+      kmTraveled: "10.000 km",
+      from: "01 de janeiro de 2009",
+      to: "26 de novembro de 2020"
+    };
+
+    terminalController.updateTable(mockNewEntry);
+    expect(terminalController.data).to.be.deep.equal([...mockDatabase, mockNewEntry]);
 
   });
 });
