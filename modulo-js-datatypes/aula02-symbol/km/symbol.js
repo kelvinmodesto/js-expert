@@ -17,3 +17,10 @@ assert.deepStrictEqual(user[uniqueKey], VALUE_SYMBOL);
 
 // unable to get by symbol variable, private
 assert.deepStrictEqual(user[Symbol('userName')], undefined);
+
+// isn't super safe, somehow is possible to get
+assert.deepStrictEqual(Object.getOwnPropertySymbols(user)[0], uniqueKey);
+
+// bypass - bad practice
+user[Symbol.for('password')] = 123;
+assert.deepStrictEqual(user[Symbol.for('password')], 123);
