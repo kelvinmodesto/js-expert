@@ -97,9 +97,12 @@ assert.deepStrictEqual(
 // testing the custom iterator
 assert.deepStrictEqual([...myDate], expectedDates);
 (async () => {
+  const dates = [];
   for await (const item of myDate) {
-    console.log(item);
+    dates.push(item);
   }
+  const expectedDatesISOStr = expectedDates.map((item) => item.toISOString());
+  assert.deepStrictEqual(dates, expectedDatesISOStr);
 })();
 
 (async () => {
