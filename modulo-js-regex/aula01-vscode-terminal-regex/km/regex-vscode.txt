@@ -1,2 +1,29 @@
 regex101.com
+/^\d{3}.\d{3}.\d{3}-\d{2}$/gm
+// should expect 2 matches
+123.123.123-14
+321.123.345-20
+321.123.345-201
+32.123.345-20
+032.23.345-20
+032.123.45-20
+200.300.500.19
+200.300.500-a1
 
+^(\w+),\s(\w+)$
+// should expect 2 matches
+Monkey, Luffy
+Roronoa, Zoro
+Vinsmoke,  Sanji
+,Nami
+Nico, Robin
+
+O [Erick Wendel](https://erickwendel.com) faz palestras e você devia segui-lo lá no [Twitter](http://twitter.com/erickwendel_) ou até no [Instagram](https://instagram.com/erickwendel_)
+
+Ah e pode pesquisar no [Google](https://google.com) ou
+[Yahoo](https://yahoo.com)
+
+vai que vai!
+
+\[(.*?)\]\(([http|https].*?)\) por
+<a href="$2">$1</a>
