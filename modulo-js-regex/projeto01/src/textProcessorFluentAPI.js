@@ -1,3 +1,5 @@
+const { verifySafety } = require('./utils');
+
 // o objetivo do Fluent API é executar tarefas
 // como um pipeline, step by step
 // e no fim, chama o build. MUITO similar ao padrao Builder
@@ -27,6 +29,20 @@ class TextProcessorFluentAPI {
     // faz o match para encontrar a string inteira que contem os dados que precisamos
     const onlyPersonData = this.#content.match(matchPerson);
     this.#content = onlyPersonData;
+    return this;
+  }
+
+  divideTextInColumns() {
+    const splitRegex = verifySafety(/,/);
+    this.#content = this.#content.map((line) => line.split(splitRegex));
+    return this;
+  }
+
+  removeEmptyCharacthers() {
+    const trimSpaces = /^\s+|\s+$|\n/g;
+    this.#content = this.#content.map((line) =>
+      line.map((it) => it.replace(trimSpaces, ''))
+    );
     return this;
   }
 
