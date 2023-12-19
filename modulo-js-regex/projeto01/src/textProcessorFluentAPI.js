@@ -46,6 +46,10 @@ class TextProcessorFluentAPI {
     return this;
   }
 
+  mapPerson() {
+    return this;
+  }
+
   build() {
     return this.#content;
   }
