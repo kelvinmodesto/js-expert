@@ -87,33 +87,29 @@ describe('TextProcessorFluentAPI suit test', () => {
 
   it('#mapPerson', () => {
     const content = [
-      [
-        'Luffy D. Monkey',
-        'brasileiro',
-        'solteiro',
-        'CPF 235.743.420-12',
-        'residente e domiciliada a Rua dos bobos',
-        'zero',
-        'bairro Alphaville',
-        'São Paulo.',
-      ],
+      'Luffy D. Monkey',
+      'brasileiro',
+      'solteiro',
+      'CPF 235.743.420-12',
+      'residente e domiciliada a Rua dos bobos',
+      'zero',
+      'bairro Alphaville',
+      'São Paulo.',
     ];
 
-    const result = new TextProcessorAPI(content).build();
+    const result = new TextProcessorAPI(content).mapPerson().build();
 
-    const expected = [
-      {
-        name: 'Luffy D. Monkey',
-        nationality: 'Brasileiro',
-        maritalState: 'Solteiro',
-        documentID: '23574342012',
-        address: 'Rua dos bobos',
-        number: 'zero',
-        neighborhood: 'Alphaville',
-        state: 'São Paulo',
-      },
-    ];
-
-    expect(expected).to.be.deep.equal(expected);
+    const expected = {
+      name: 'Luffy D. Monkey',
+      nationality: 'Brasileiro',
+      maritalState: 'Solteiro',
+      documentID: '23574342012',
+      address: 'Rua dos bobos',
+      number: 'zero',
+      neighborhood: 'Alphaville',
+      state: 'São Paulo',
+    };
+    console.log(result.address);
+    expect(result).to.be.deep.equal(expected);
   });
 });

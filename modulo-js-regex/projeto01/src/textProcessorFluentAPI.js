@@ -1,4 +1,5 @@
 const { verifySafety } = require('./utils');
+const Person = require('./person');
 
 // o objetivo do Fluent API é executar tarefas
 // como um pipeline, step by step
@@ -47,6 +48,7 @@ class TextProcessorFluentAPI {
   }
 
   mapPerson() {
+    this.#content = new Person(this.#content);
     return this;
   }
 
