@@ -8,9 +8,20 @@ export default class PostgresStrategy {
     this.table = 'warriors';
   }
 
-  async connect() {}
+  async connect() {
+    this.#instance = knex({
+      client: 'pg',
+      connection: this.connectionString,
+    });
 
-  async create(item) {}
+    return this.#instance.raw('SELECT 1 + 1 AS result');
+  }
 
-  async read(item) {}
+  async create(item) {
+    return this.#instance.insert(item).into(this.table);
+  }
+
+  async read(item) {
+    return this.#instance.select().from(this.table);
+  }
 }
