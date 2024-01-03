@@ -1,7 +1,11 @@
-import ContextStrategy from '../base/contextStrategy';
-export default class MongoStrategy extends ContextStrategy {
+import MongoDB from 'mongodb';
+
+export default class MongoStrategy {
+  #instance;
   constructor(connectionString) {
     this.connectionString = connectionString;
+
+    this.collection = 'warriors';
   }
   async connect() {}
 

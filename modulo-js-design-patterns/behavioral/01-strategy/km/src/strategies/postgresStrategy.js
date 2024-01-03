@@ -1,7 +1,11 @@
-import ContextStrategy from '../base/contextStrategy';
-export default class PostgresStrategy extends ContextStrategy {
+import knex from 'knex';
+
+export default class PostgresStrategy {
+  #instance;
   constructor(connectionString) {
     this.connectionString = connectionString;
+
+    this.table = 'warriors';
   }
 
   async connect() {}
