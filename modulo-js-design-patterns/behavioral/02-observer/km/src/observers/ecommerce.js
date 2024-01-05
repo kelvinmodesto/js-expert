@@ -1,5 +1,7 @@
-import IObserver from './IObserver';
-
-export default class ECommerce extends IObserver {
-  update({ id, userName }) {}
+export default class ECommerce {
+  update({ id, userName }) {
+    console.log(
+      `[${id}]: [ecommerce] your order will be separated to be shipment ${userName}`
+    );
+  }
 }

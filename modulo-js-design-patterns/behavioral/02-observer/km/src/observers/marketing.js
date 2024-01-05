@@ -1,5 +1,5 @@
-import IObserver from './IObserver';
-
-export default class Marketing extends IObserver {
-  update({ id, userName }) {}
+export default class Marketing {
+  update({ id, userName }) {
+    console.log(`[${id}]: [marketing] will send a welcome email ${userName}`);
+  }
 }
