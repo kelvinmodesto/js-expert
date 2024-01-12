@@ -2,7 +2,7 @@ import RickAndMortyBRLAdapter from './business/adapters/rickyAndMortyBRLAdapter.
 import RickAndMortyUSAAdapter from './business/adapters/rickyAndMortyUSAAdapter.js';
 
 const data = [RickAndMortyBRLAdapter, RickAndMortyUSAAdapter].map(
-  (integration) => integration.getCharaters()
+  (integration) => integration.getCharacters()
 );
 
 const all = await Promise.allSettled(data);
