@@ -9,7 +9,7 @@
     "test:cov": "NODE_OPTIONS=--experimental-vm-modules npx jest --config jest.config.mjs --coverage "
   },
   "keywords": [],
-  "author": "",
+  "author": "kelvinmodesto",
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.7.0"
