@@ -1,14 +1,13 @@
 import { describe, expect, jest, beforeEach, test } from '@jest/globals';
-import {
-  factoryTemplate,
-  repositoryTemplate,
-  serviceTemplate,
-} from '../../src/templates/index.js';
+
 import {
   factoryTemplateMock,
   repositoryTemplateMock,
   serviceTemplateMock,
 } from './mocks/index.js';
+
+import templates from '../../src/templates/index.js';
+const { factoryTemplate, repositoryTemplate, serviceTemplate } = templates;
 
 describe('#Codegen 3-layers arch', () => {
   const componentName = 'product';
