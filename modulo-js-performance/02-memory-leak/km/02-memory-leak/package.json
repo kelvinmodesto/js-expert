@@ -1,0 +1,19 @@
+{
+  "name": "02-memory-leak",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "0x": "^5.7.0",
+    "autocannon": "^7.14.0",
+    "climem": "^2.0.0",
+    "clinic": "^13.0.0"
+  }
+}
